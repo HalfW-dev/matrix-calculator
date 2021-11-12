@@ -1,4 +1,4 @@
-# adjugate-matrix-calculator
+# matrix-calculator
 
 How to use:
 
