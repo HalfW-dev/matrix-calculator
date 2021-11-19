@@ -3,7 +3,7 @@
 How to use:
 
 In the terminal:
-1. Specify the dimension of the square matrix
+1. Specify the dimension of the matrix
 2. Each input is a row of the matrix, each element is separated by space
     For example:
     1 2 3 (press Enter)
