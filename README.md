@@ -9,4 +9,6 @@ In the terminal:
     1 2 3 (press Enter)
     4 5 6 (press Enter)
     7 8 9 (press Enter)
-3. Output will include the cofactor matrix of the provided matrix, and the determinant of both the provided matrix and the cofactor matrix.
+3. Output will include:
+    - If square matrix: Cofactor matrix, inverse matrix (if det of input matrix is not 0), rank, and determinants of all matrices
+    - If non-square matrix: Rank and determinant 
