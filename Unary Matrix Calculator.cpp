@@ -2,10 +2,10 @@
 #include <vector>
 #include <cmath>
 
-int det(std::vector<std::vector<int>> mat, int n) //Determinant function
+int det(std::vector<std::vector<int> > mat, int n) //Determinant function
 {
     int d = 0;
-    std::vector<std::vector<int>> submat(n, std::vector<int>(n, 0)); //Blank matrix so no push shenanigans
+    std::vector<std::vector<int> > submat(n, std::vector<int>(n, 0)); //Blank matrix so no push shenanigans
 
     if (n == 1) return (mat[0][0]);
     if (n == 2) return ((mat[0][0] * mat[1][1]) - (mat[1][0] * mat[0][1]));
@@ -32,9 +32,9 @@ int det(std::vector<std::vector<int>> mat, int n) //Determinant function
     return d;
 }
 
-int minor_matrix_det_calculator(std::vector<std::vector<int>> mat, int i, int j, int n) //Specifies the ij element for Laplace expansion for all elements in the argument matrix
+int minor_matrix_det_calculator(std::vector<std::vector<int> > mat, int i, int j, int n) //Specifies the ij element for Laplace expansion for all elements in the argument matrix
 {
-    std::vector<std::vector<int>> minor(n - 1, std::vector<int>(n - 1, 0));; //Blank minor matrix
+    std::vector<std::vector<int> > minor(n - 1, std::vector<int>(n - 1, 0));; //Blank minor matrix
     int i_minor = 0;
     int j_minor = 0;
 
@@ -63,9 +63,9 @@ int minor_matrix_det_calculator(std::vector<std::vector<int>> mat, int i, int j,
     return det_minor;
 }
 
-std::vector<std::vector<int>> cofactor_matrix(std::vector<std::vector<int>> &mat, int n)
+std::vector<std::vector<int> > cofactor_matrix(std::vector<std::vector<int> > &mat, int n)
 {
-    std::vector<std::vector<int>> cft_mat(n, std::vector<int>(n, 0));//Blank cofactor matrix 
+    std::vector<std::vector<int> > cft_mat(n, std::vector<int>(n, 0));//Blank cofactor matrix 
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < n; j++)
@@ -77,10 +77,10 @@ std::vector<std::vector<int>> cofactor_matrix(std::vector<std::vector<int>> &mat
     return cft_mat;
 }
 
-std::vector<std::vector<int>> inverse_matrix(std::vector<std::vector<int>>& mat, int n)
+std::vector<std::vector<int> > inverse_matrix(std::vector<std::vector<int> >& mat, int n)
 {
-    std::vector<std::vector<int>> cft_mat = cofactor_matrix(mat, n);
-    std::vector<std::vector<int>> inv_mat(n, std::vector<int>(n, 0)); //Blank inverse matrix
+    std::vector<std::vector<int> > cft_mat = cofactor_matrix(mat, n);
+    std::vector<std::vector<int> > inv_mat(n, std::vector<int>(n, 0)); //Blank inverse matrix
     int det_mat = det(mat, n);
 
     for (int i = 0; i < n; i++)
@@ -92,7 +92,7 @@ std::vector<std::vector<int>> inverse_matrix(std::vector<std::vector<int>>& mat,
     return inv_mat;
 }
 
-void swap(std::vector<std::vector<int>> &mat, int row1, int row2, int col)
+void swap(std::vector<std::vector<int> > &mat, int row1, int row2, int col)
 {
     for (int i = 0; i < col; i++)
     {
@@ -102,7 +102,7 @@ void swap(std::vector<std::vector<int>> &mat, int row1, int row2, int col)
     }
 }
 
-int rankOfMatrix(std::vector<std::vector<int>> &mat, int n)
+int rankOfMatrix(std::vector<std::vector<int> > &mat, int n)
 {
     int rank = n;
 
@@ -158,7 +158,7 @@ int main()
     std::cout << "Enter dimension of matrix (columns): ";
     std::cin >> m;
 
-    std::vector<std::vector<int>> mat(n, std::vector<int>(m, 0));//Blank mat so I don't have to deal with the push shenanigans
+    std::vector<std::vector<int> > mat(n, std::vector<int>(m, 0));//Blank mat so I don't have to deal with the push shenanigans
 
     for (int i = 0; i < n; i++)
         for (int j = 0; j < m; j++)
@@ -168,7 +168,7 @@ int main()
 
     if (n == m)
     {
-        std::vector<std::vector<int>> cft_mat = cofactor_matrix(mat, n);
+        std::vector<std::vector<int> > cft_mat = cofactor_matrix(mat, n);
         std::cout << "Your cofactor matrix is: " << std::endl;
 
         for (int i = 0; i < n; i++)
@@ -178,10 +178,12 @@ int main()
             std::cout << std::endl;
         }
 
+        std::cout << "The determinant of your cofactor matrix is: "<< det(cft_mat, n) << std::endl;
+
         if (det(mat, n))
         {
-            std::vector<std::vector<int>> inv_mat = inverse_matrix(mat, n);
-
+            std::vector<std::vector<int> > inv_mat = inverse_matrix(mat, n);
+            
             std::cout << "Your inverse matrix is: " << std::endl;
 
             for (int i = 0; i < n; i++)
@@ -190,15 +192,20 @@ int main()
                     std::cout << inv_mat[i][j] << " ";
                 std::cout << std::endl;
             }
+
+            std::cout << "The determinant of your inverse matrix is: "<< det(inv_mat, n)<< std::endl;
         }
         else
         {
             std::cout << "There's no inverse matrix for the provided matrix as its determinant is equal to 0." << std::endl;
         }
+
+        std::cout << "The determinant of your matrix is: "<< det(mat, n)<< std::endl;
     }
     
     int rank = rankOfMatrix(mat, n);
     std::cout << "The rank of your matrix is: " << rank << std::endl;
 
+    system("pause");
     return 0;
 }
